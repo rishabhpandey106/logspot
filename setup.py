@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="logspot",
-    version="0.1.0",
+    version="0.1.1",
     description="Reusable /logs route for Flask apps",
     url="https://github.com/rishabhpandey106/logspot",
     author="Rishabh Kumar Pandey",

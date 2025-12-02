@@ -10,6 +10,7 @@ LogSpot is a lightweight, reusable Flask extension that adds a `/logs` route to 
 - **Pagination/Limit**: Control the number of log lines displayed.
 - **Download**: Download logs as a file for offline analysis.
 - **Simple API**: Easy-to-use logging methods attached directly to your Flask `app` object.
+- **Alerts**: Send Telegram alerts for critical errors.
 
 ## Installation
 
@@ -31,13 +32,13 @@ Here's how to integrate LogSpot into your Flask application:
 
 ```python
 from flask import Flask
-from central_logs_flask import setup_logs
+from logspot import setup_logs
 
 app = Flask(__name__)
 
 # Initialize LogSpot
 # This registers the /logs blueprint and attaches logging methods to 'app'
-logger = setup_logs(app, service="my_service")
+logger = setup_logs(app, service="resbot",telegram_chat_id=TELEGRAM_CHAT_ID)
 
 @app.route("/")
 def index():
@@ -47,7 +48,7 @@ def index():
 
 @app.route("/error")
 def trigger_error():
-    logger.error("Something went wrong!")
+    logger.error("Something went wrong!", notify=True)
     return "Error logged", 500
 
 if __name__ == "__main__":

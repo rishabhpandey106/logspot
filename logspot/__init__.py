@@ -1,8 +1,8 @@
 from .manager import LogManager
 from .blueprint import create_logs_blueprint
 
-def setup_logs(app, service="app"):
-    manager = LogManager(service=service)
+def setup_logs(app, service="app", log_dir: str = "logs", telegram_chat_id: str | None = None):
+    manager = LogManager(service=service, log_dir=log_dir, telegram_chat_id=telegram_chat_id)
     bp = create_logs_blueprint(manager.log_file, download_name=f"{service}.log")
     app.register_blueprint(bp)
 
