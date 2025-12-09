@@ -3,11 +3,12 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
-
-def send_telegram(msg: str, chat_id: str | None) -> bool: 
-    """Send message to a specific Telegram chat_id."""
-    if not TELEGRAM_BOT_TOKEN:
+def send_telegram(msg: str, chat_id: str | None, bot_token: str) -> bool: 
+    """
+    Send message to a specific Telegram chat_id using the given bot_token.
+    Both chat_id and bot_token MUST be provided by caller.
+    """
+    if not bot_token:
         print("Telegram Bot Token not set.")
         return False
 
@@ -15,7 +16,7 @@ def send_telegram(msg: str, chat_id: str | None) -> bool:
         print("No chat_id provided for Telegram message")
         return False
 
-    url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
+    url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
     data = {
         "chat_id": chat_id,
         "text": msg,
