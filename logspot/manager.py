@@ -27,7 +27,7 @@ class LogManager:
 
         if not self.logger.handlers:
             handler = logging.FileHandler(self.log_file, encoding="utf-8")
-            formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+            formatter = logging.Formatter("%(asctime)s --- %(levelname)s --- %(message)s --- %(module)s --- %(lineno)d")
             handler.setFormatter(formatter)
             self.logger.addHandler(handler)
             self.logger.propagate = False
